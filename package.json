@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/gjg44/floki/issues"
   },
-  "homepage": "https://github.com/gjg44/floki#readme"
+  "homepage": "https://github.com/gjg44/floki#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.12"
+  }
 }
