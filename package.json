@@ -1,0 +1,19 @@
+{
+  "name": "floki",
+  "version": "1.0.0",
+  "description": "Floki's database in the sky",
+  "main": "floki.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gjg44/floki.git"
+  },
+  "author": "Ragnar & Rollo Industries, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjg44/floki/issues"
+  },
+  "homepage": "https://github.com/gjg44/floki#readme"
+}
