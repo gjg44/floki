@@ -26,5 +26,5 @@ setupController(app);
 apiController(app);
 
 app.listen(port, function() {
-  console.log(`Server listening on port: ${port}`);
+  console.log(`Floki is listening on port ${port}, with axe in hand...`);
 });
