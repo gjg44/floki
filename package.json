@@ -20,6 +20,8 @@
     "body-parser": "^1.18.1",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "mongoose": "^4.11.12"
+    "mongoose": "^4.11.12",
+    "node-quickbooks-oauth2": "^2.0.13",
+    "simple-oauth2": "^1.3.0"
   }
 }
