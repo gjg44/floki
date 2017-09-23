@@ -26,6 +26,7 @@ const qbClientID =  QB_Globals.Sandbox_ClientID;
 const qbClientSecret = QB_Globals.Sandbox_ClientSecret;
 
 
+
 var qbAppSettings = {
   clientID: qbClientID,
   clientSecret: qbClientSecret,
@@ -62,6 +63,24 @@ function setQBRedirectURI(port) {
   } else {
     return "https://simple-oauth2.herokuapp.com/QBcallback";
   }
+}
+
+module.exports.createNodeQBObject = function (clientID,clientSecret,oAuth2Token,companyID,debugFlag,sandboxFlag) {
+  // Create the node-quickbooks-oauth2 QuickBooks object.
+  // This will be populated and passed to the 'new Quickbooks' call
+  // which will be the object passed to subsequent API calls.
+  var NodeQuickBooksOauth2_Object = {
+    consumerKey: clientID,
+    cosnumerSecret: clientSecret,
+    debug: debugFlag,
+    endpoint: '',
+    oauth2AccessToken: oAuth2Token,
+    realmId: companyID,
+    token: '',
+    tokenSecret: '',
+    useSandbox: sandboxFlag
+  };
+  return NodeQuickBooksOauth2_Object;
 }
 
 module.exports.oa2ServerSettings = function () {

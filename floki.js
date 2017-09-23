@@ -1,6 +1,7 @@
 var express = require('express');
 var app  = express();
 var mongoose = require('mongoose');
+var assert = require('assert');
 var config = require('./config');
 var setupController = require('./controllers/setupController');
 var apiController = require('./controllers/apiController');
@@ -14,6 +15,10 @@ var port = process.env.PORT || 3000;
 var mongoOptions = {
   useMongoClient: true
 };
+// Use native promises to avoide Mongoose warning. Consider other
+// promise libraries?  This just uses the native ES6 promises (could use bluebird)
+mongoose.Promise = global.Promise;
+//assert.equal(query.exec().constructor, global.Promise);
 
 app.use('/', express.static(__dirname + '/public/Node-Todo'));
 
