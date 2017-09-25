@@ -6,6 +6,7 @@ var config = require('./config');
 var setupController = require('./controllers/setupController');
 var apiController = require('./controllers/apiController');
 var apiQB = require('./controllers/apiQB');
+var apiTSheets = require('./controllers/apiTSheets');
 var QuickBooks = require('node-quickbooks-oauth2');
 var path = require('path');
 
@@ -35,6 +36,9 @@ apiController(app);
 
 // establish QB-related API endpoints
 apiQB(app);
+
+// establish TSheets-related API endpoints
+apiTSheets(app);
 
 app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname+'/homepage.html'));

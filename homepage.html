@@ -6,15 +6,36 @@
 </head>
 
 <body>
-    <h1>Greetings Ragnar!  May Odin look kindly upon you and yours today.</h1>
-    <br><br><br>
+    <h1>Greetings Ragnar. May Odin smile upon you and your clan.
+    </h1>
+    <h2>Welcome to Floki's Ultimate Cloud Database (FUCD)!</h2>
+    <br>
+    <h3>Intuit/Quickbooks Stuff</h3>
         <ol>
-            <li><a href="/authQB">Obtain API Token Intuit/QBO Authorization Server.</a></li>
-            <br><br>
+            <li><a href="/authQB">Obtain API Access Credentials from Intuit Authorization Server.</a></li>
+            <br>
             <li><a href="/testChartofAccountsAccess">Read Chart of Accounts (CoA) information from QBO and return to webpage as JSON object.</a></li>
-            <br><br>
-            <li><a href="/writeEmployeesToDatabase">Read Employees from QBO and write to FUCD. </a></li>
+            <br>
+            <li><a href="/writeEmployeesToDatabase">Read Employees from QBO company file and write to FUCD. (should match active employees in TSheets and ADP) </a></li>
+            <br>
         </ol>
+    <br>
+    <h3> TSheets Stuff</h3>
+        <ol>
+            <li><a href="/authTS">Obtain API Access Credentials from TSheets Authorization Server.</a></li>
+            <br>
+            <li><a href="/tsGetUsers">Get list of TSheets Users (should match active employees in QBO and ADP)</a></li>
+            <br>
+        </ol>
+    <br>
+    <h3> <em>ADP Stuff (non-functional until we get info from ADP)</em></h3>
+    <ol>
+        <li><a href="/authADP">Obtain API Access Credentials from ADP Authorization Server.</a></li>
+        <br>
+        <li><a href="/adpGetEmployees">Get list of Employees in ADP database (should match active employees in QBO and TSheets)</a></li>
+        <br>
+    </ol>
+<br>
 </body>
 
 </html>

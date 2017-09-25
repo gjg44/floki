@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 const QBoa2 = require('./../config/qbConfig.js');
 var QuickBooks = require('node-quickbooks-oauth2');
 
-// Configure QB OAuth2 settings
-const qbAuth = QBoa2.oa2ServerSettings();
 
 const listenPort = process.env.PORT || 3000;
 const qbListenPort = listenPort;
@@ -64,7 +62,7 @@ module.exports = function(app) {
     console.log('exiting /testChartofAccountsAccess endpoint');
   });
 
-  // test account access
+  // Get employees from QBO company file and write/update FUCD
   app.get('/writeEmployeesToDatabase', async (req,res) => {
     console.log('entering /writeEmployeesToDatabase endpoint');
     try {

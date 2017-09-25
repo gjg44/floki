@@ -1,3 +1,25 @@
+const qbSandboxClientID = 'Q0xKCSwHzkYafj5XTIgjst036kK08DrcAmm9HcB28godJxJApS';
+const qbSandboxClientSecret = 'xYaKJYLyOKwzFpPlhXmBp0sYuQ46ijLmpcZKTZOs';
+const qbSandbox1CompanyID =  193514579895534;
+const qbSandbox2CompanyID = 193514593237604;
+
+const qbRRJClientID = 'Q0n4lKJ2IiOaFAyuprC3UKlAron9YJmg2BHhKC3CFYSyDtQ9mG';
+const qbRRJClientSecret = 'DzoxUQvur4LeaMPaKhHE3WhVtSByfAYqGcdnUmpF';
+const qbRRJCompanyID = 123145721334974
+
+var QB_Globals = {
+  Production_ClientID: qbRRJClientID,
+  Production_ClientSecret: qbRRJClientSecret,
+  Production_CompanyID: qbRRJCompanyID,
+  Production_BaseURL: 'quickbooks.api.intuit.com',
+  Sandbox_ClientID:  qbSandboxClientID,
+  Sandbox_ClientSecret: qbSandboxClientSecret,
+  Sandbox1_CompanyID: qbSandbox1CompanyID,
+  Sandbox2_CompanyID: qbSandbox2CompanyID,
+  Sandbox_BaseURL: 'sandbox-quickbooks.api.intuit.com',
+  scope: 'com.intuit.quickbooks.accounting com.intuit.quickbooks.payment'
+};
+
 const qbInfo = {
  issuer: "https://oauth.platform.intuit.com/op/v1",
  authorization_endpoint: "https://appcenter.intuit.com/connect/oauth2",
@@ -13,23 +35,9 @@ const qbInfo = {
  claims_supported: ["aud","exp","iat","iss","realmid","sub"]
 };
 
-var QB_Globals = {
-  Sandbox_ClientID:  'Q0xKCSwHzkYafj5XTIgjst036kK08DrcAmm9HcB28godJxJApS',
-  Sandbox_ClientSecret: 'xYaKJYLyOKwzFpPlhXmBp0sYuQ46ijLmpcZKTZOs',
-  Sandbox1_CompanyID: 193514579895534,
-  Sandbox2_CompanyID: 193514593237604,
-  Sandbox_BaseURL: 'sandbox-quickbooks.api.intuit.com',
-  scope: 'com.intuit.quickbooks.accounting com.intuit.quickbooks.payment'
-};
-
-const qbClientID =  QB_Globals.Sandbox_ClientID;
-const qbClientSecret = QB_Globals.Sandbox_ClientSecret;
-
-
-
 var qbAppSettings = {
-  clientID: qbClientID,
-  clientSecret: qbClientSecret,
+  clientID: qbSandboxClientID,
+  clientSecret: qbSandboxClientSecret,
   scope: QB_Globals.scope,
   authCode: 'L011503694415iw6xLoJiZj2GK8JQUrvDYli0tYb9Wy5VZDA87',
   companyID: QB_Globals.Sandbox1_CompanyID,
@@ -37,8 +45,8 @@ var qbAppSettings = {
   initState: 'qbInitState',
   userCreds: {
     client: {
-      id:     qbClientID,
-      secret: qbClientSecret,
+      id:     qbSandboxClientID,
+      secret: qbSandboxClientSecret,
     },
     auth: {
       tokenHost: qbInfo.issuer,
@@ -65,7 +73,13 @@ function setQBRedirectURI(port) {
   }
 }
 
-module.exports.createNodeQBObject = function (clientID,clientSecret,oAuth2Token,companyID,debugFlag,sandboxFlag) {
+module.exports.createNodeQBObject = function (
+  clientID,
+  clientSecret,
+  oAuth2Token,
+  companyID,
+  debugFlag,
+  sandboxFlag) {
   // Create the node-quickbooks-oauth2 QuickBooks object.
   // This will be populated and passed to the 'new Quickbooks' call
   // which will be the object passed to subsequent API calls.
@@ -81,10 +95,6 @@ module.exports.createNodeQBObject = function (clientID,clientSecret,oAuth2Token,
     useSandbox: sandboxFlag
   };
   return NodeQuickBooksOauth2_Object;
-}
-
-module.exports.oa2ServerSettings = function () {
-    return qbInfo;
 }
 
 module.exports.oa2AppSettings = function(port) {
