@@ -63,7 +63,6 @@ module.exports = function(app) {
             console.log(`${user.first_name} ${user.last_name}'s employee record not found. Adding to database.`);
           }
         });
-        console.log(`User id: ${user.id}  Name: ${user.first_name} ${user.last_name}`);
       });  
     } catch(e) {
       return res.json(e);
