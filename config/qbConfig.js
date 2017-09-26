@@ -56,7 +56,7 @@ var qbAppSettings = {
       useBodyAuth: false
     }
   },
-  qbAuthResponse: {
+  AuthResponse: {
     access_token: '',
     refresh_token: '',
     x_refresh_token_expires_in: '',

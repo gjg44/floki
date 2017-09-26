@@ -1,6 +1,7 @@
 const tsClientID ='e2a16cb99602437c9ebebc51f20e629e';
 const tsClientSecret = 'f37146ca37a04386ae41c3cba37f8e99';
 
+const TSheetsApi = require('tsheetsapi');
 
 var tsAuthenticationSettings = {
   client_id: tsClientID,
@@ -46,4 +47,12 @@ function setTSRedirectURI(port) {
 module.exports.oa2AppSettings = function(port) {
   tsAuthenticationSettings.redirect_uri = setTSRedirectURI(port);
   return tsAuthenticationSettings;
+}
+
+module.exports.tsApi = function(AuthResponse) {
+  const tapi = new TSheetsApi({
+    bearerToken: AuthResponse.access_token
+  });
+
+  return tapi;
 }

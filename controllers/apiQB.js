@@ -15,14 +15,14 @@ var qbApp = QBoa2.oa2AppSettings(qbListenPort);
 var nodeQBObj = QBoa2.createNodeQBObject(
   qbApp.clientID,
   qbApp.clientSecret,
-  qbApp.qbAuthResponse.access_token,  // starts empty
+  qbApp.AuthResponse.access_token,  // starts empty
   qbApp.companyID,
   false,         // debugFlag
   true);        // sandboxFlag
 
-const simpleOauth2ModuleObject = simpleOauthModule.create(qbApp.userCreds);
+const qbOA2 = simpleOauthModule.create(qbApp.userCreds);
 
-const qbAuthURI = simpleOauth2ModuleObject.authorizationCode.authorizeURL({
+const qbAuthURI = qbOA2.authorizationCode.authorizeURL({
   scope: qbApp.scope,
   redirect_uri: qbApp.redirect_uri,
   state: qbApp.initState
@@ -87,22 +87,19 @@ module.exports = function(app) {
     console.log('exiting /writeEmployeesToDatabase endpoint');
   });
 
-
-
-
   // Callback service parsing the QB authorization token and asking for the access token
   app.get('/QBcallback', async (req, res) => {
     try {
       if (req.query.error) {
         throw `authorization response error: ${req.query.error}`;
       } else if (req.query.state === qbApp.initState) {
-        qbApp.qbAuthResponse = await simpleOauth2ModuleObject.authorizationCode
+        qbApp.AuthResponse = await qbOA2.authorizationCode
         .getToken({
           code: req.query.code,
           redirect_uri: qbApp.redirect_uri
         });
-        nodeQBObj.oauth2AccessToken = qbApp.qbAuthResponse.access_token;
-        console.log(`Token recieved from QBO/Intuit OAuth2 Server.  It expires in ${qbApp.qbAuthResponse.expires_in/3600} hour(s)`);
+        nodeQBObj.oauth2AccessToken = qbApp.AuthResponse.access_token;
+        console.log(`Token recieved from QBO/Intuit OAuth2 Server.  It expires in ${qbApp.AuthResponse.expires_in/3600} hour(s)`);
         return res.redirect('/');
       } else {
           throw `error: QB/Intuit returned wrong returned state. returned initState: ${req.query.error}`;
