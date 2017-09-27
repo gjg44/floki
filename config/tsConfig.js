@@ -3,6 +3,7 @@ const tsClientSecret = 'f37146ca37a04386ae41c3cba37f8e99';
 
 const TSheetsApi = require('tsheetsapi');
 
+
 var tsAuthenticationSettings = {
   client_id: tsClientID,
   redirect_uri: '',
@@ -18,9 +19,11 @@ var tsAuthenticationSettings = {
       tokenHost: 'https://rest.tsheets.com',
       tokenPath: '/api/v1/grant',
       authorizePath: '/api/v1/authorize',
+      revokePath: '/api/v1/revoke'
     },
     options: {
-      useBodyAuth: true
+      useBodyAuth: true,
+      useBasicAuthorizationHeader: false
     }
   },
   AuthResponse: {
@@ -35,6 +38,7 @@ var tsAuthenticationSettings = {
     expires_at: ''
   }
 }
+
 
 function setTSRedirectURI(port) {
   if (port === 3000) {
@@ -56,3 +60,4 @@ module.exports.tsApi = function(AuthResponse) {
 
   return tapi;
 }
+
