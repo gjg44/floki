@@ -4,6 +4,7 @@
   "description": "Floki's database in the sky",
   "main": "floki.js",
   "scripts": {
+    "start": "node floki.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
