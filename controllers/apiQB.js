@@ -1,4 +1,6 @@
 'use strict';
+var cfgVals = require('./../config/config');
+
 var QBEmployee = require('../models/qbEmployeeModel');
 const simpleOauthModule = require('simple-oauth2');
 
@@ -10,6 +12,8 @@ var QuickBooks = require('node-quickbooks-oauth2');
 
 
 var qbApp = QBoa2.oa2AppSettings();
+
+
 var nodeQBObj = QBoa2.createNodeQBObject(
   qbApp.clientID,
   qbApp.clientSecret,

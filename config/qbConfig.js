@@ -39,17 +39,17 @@ const qbInfo = {
 };
 
 var qbAppSettings = {
-  clientID: qbSandboxClientID,
-  clientSecret: qbSandboxClientSecret,
+  clientID: '',
+  clientSecret: '',
   scope: QB_Globals.scope,
   authCode: 'L011503694415iw6xLoJiZj2GK8JQUrvDYli0tYb9Wy5VZDA87',
-  companyID: QB_Globals.Sandbox1_CompanyID,
+  companyID: '',
   redirect_uri: '',
   initState: 'qbInitState',
   userCreds: {
     client: {
-      id:     qbSandboxClientID,
-      secret: qbSandboxClientSecret,
+      id:     '',
+      secret: '',
     },
     auth: {
       tokenHost: qbInfo.issuer,
@@ -68,8 +68,7 @@ var qbAppSettings = {
   }
 };
 
-function setQBRedirectURI() {
-  const port = process.env.PORT || 3000;
+function setQBRedirectURI(port) {
   if (port === 3000) {
     return cfgVals.localhost+cfgVals.port+cfgVals.tsCallback;
   } else {
@@ -102,6 +101,21 @@ module.exports.createNodeQBObject = function (
 }
 
 module.exports.oa2AppSettings = function() {
-  qbAppSettings.redirect_uri = setQBRedirectURI();
+  const port = process.env.PORT || 3000;
+  qbAppSettings.redirect_uri = setQBRedirectURI(port);
+  if (port === 3000) {
+    qbAppSettings.clientID = cfgVals.qbSandboxClientID;
+    qbAppSettings.clientSecret = cfgVals.qbSandboxClientSecret;
+    qbAppSettings.companyID = cfgVals.qbSandbox1CompanyID;
+    qbAppSettings.userCreds.client.id = cfgVals.qbSandboxClientID;
+    qbAppSettings.userCreds.client.secret = cfgVals.qbSandboxClientSecret;
+  } else {
+    qbAppSettings.clientID = cfgVals.qbRRJClientID;
+    qbAppSettings.clientSecret = cfgVals.qbRRJClientSecret;
+    qbAppSettings.companyID = cfgVals.qbRRJCompanyID;
+    qbAppSettings.userCreds.client.id = cfgVals.qbRRJClientID;
+    qbAppSettings.userCreds.client.secret = cfgVals.qbRRJClientSecret;
+  }
+
   return qbAppSettings;
 }
