@@ -102,7 +102,8 @@ module.exports = function(app) {
           redirect_uri: qbApp.redirect_uri
         });
         nodeQBObj.oauth2AccessToken = qbApp.AuthResponse.access_token;
-        console.log(`Token recieved from QBO/Intuit OAuth2 Server.  It expires in ${qbApp.AuthResponse.expires_in/3600} hour(s)`);
+        console.log(`Token recieved from QBO/Intuit OAuth2 Server.  It expires in ${qbApp.AuthResponse.expires_in/3600} hour(s)\n\n`);
+        console.log(nodeQBObj);
         return res.redirect('/');
       } else {
           throw `error: QB/Intuit returned wrong returned state. returned initState: ${req.query.error}`;
