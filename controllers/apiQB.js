@@ -20,7 +20,7 @@ var nodeQBObj = QBoa2.createNodeQBObject(
   qbApp.AuthResponse.access_token,  // starts empty
   qbApp.companyID,
   false,         // debugFlag
-  true);        // sandboxFlag
+  qbApp.sandboxFlag);        // sandboxFlag
 
 const qbOA2 = simpleOauthModule.create(qbApp.userCreds);
 
