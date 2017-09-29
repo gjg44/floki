@@ -1,4 +1,21 @@
 {
   "uname": "test",
-  "pwd": "test"
+  "pwd": "test",
+  "herokuAppLink": "https://floki-v0.herokuapp.com",
+  "localhost": "http://localhost:",
+  "port": 3000,
+  "tsCallback": "/TScallback",
+  "qbCallback": "/QBcallback",
+  "adpCallback": "/ADPcallback",
+
+  "qbSandboxClientID": "Q0xKCSwHzkYafj5XTIgjst036kK08DrcAmm9HcB28godJxJApS",
+  "qbSandboxClientSecret": "xYaKJYLyOKwzFpPlhXmBp0sYuQ46ijLmpcZKTZOs",
+  "qbSandbox1CompanyID":  193514579895534,
+  "qbSandbox2CompanyID": 193514593237604,
+  "qbRRJClientID": "Q0n4lKJ2IiOaFAyuprC3UKlAron9YJmg2BHhKC3CFYSyDtQ9mG",
+  "qbRRJClientSecret": "DzoxUQvur4LeaMPaKhHE3WhVtSByfAYqGcdnUmpF",
+  "qbRRJCompanyID": 123145721334974,
+
+  "tsClientID": "e2a16cb99602437c9ebebc51f20e629e",
+  "tsClientSecret": "f37146ca37a04386ae41c3cba37f8e99"
 }

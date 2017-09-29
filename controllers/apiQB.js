@@ -8,10 +8,8 @@ const QBoa2 = require('./../config/qbConfig.js');
 var QuickBooks = require('node-quickbooks-oauth2');
 
 
-const listenPort = process.env.PORT || 3000;
-const qbListenPort = listenPort;
 
-var qbApp = QBoa2.oa2AppSettings(qbListenPort);
+var qbApp = QBoa2.oa2AppSettings();
 var nodeQBObj = QBoa2.createNodeQBObject(
   qbApp.clientID,
   qbApp.clientSecret,
@@ -89,6 +87,7 @@ module.exports = function(app) {
 
   // Callback service parsing the QB authorization token and asking for the access token
   app.get('/QBcallback', async (req, res) => {
+    console.log('entering QBCallback "endpoint" ');
     try {
       if (req.query.error) {
         throw `authorization response error: ${req.query.error}`;
@@ -104,8 +103,9 @@ module.exports = function(app) {
       } else {
           throw `error: QB/Intuit returned wrong returned state. returned initState: ${req.query.error}`;
       }
+    console.log('exiting QBCallback endpoint without thrown error');
     } catch (e) {
-        console.error('caught error: ',e);
+        console.error('caught error in QBCallback: ',e);
         return res.json(e);
     }
   });

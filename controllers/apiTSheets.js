@@ -9,12 +9,9 @@ const TSheetsApi = require('tsheetsapi');
 
 var bodyParser = require('body-parser');
 
-const tsConfig = require('./../config/tsConfig.js');
-const listenPort = process.env.PORT || 3000;
-const tsListenPort = listenPort;
-
 // Configure TSheets Authentication Settings
-const tsApp = tsConfig.oa2AppSettings(tsListenPort);
+const tsConfig = require('./../config/tsConfig.js');
+const tsApp = tsConfig.oa2AppSettings();
 
 // Initialize the OAuth2 Libary
 const oauth2 = require('simple-oauth2').create(tsApp.userCreds);

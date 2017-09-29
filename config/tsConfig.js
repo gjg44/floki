@@ -1,5 +1,7 @@
-const tsClientID ='e2a16cb99602437c9ebebc51f20e629e';
-const tsClientSecret = 'f37146ca37a04386ae41c3cba37f8e99';
+var cfgVals = require('./config');
+
+const tsClientID = cfgVals.tsClientID;
+const tsClientSecret = cfgVals.tsClientSecret;
 
 const TSheetsApi = require('tsheetsapi');
 
@@ -40,16 +42,17 @@ var tsAuthenticationSettings = {
 }
 
 
-function setTSRedirectURI(port) {
+function setTSRedirectURI() {
+  const port = process.env.PORT || 3000;
   if (port === 3000) {
-    return "http://localhost:"+port+"/TScallback";
+    return cfgVals.localhost+cfgVals.port+cfgVals.tsCallback;
   } else {
-    return "https://simple-oauth2.herokuapp.com/TScallback";
+    return cfgVals.herokuAppLink+cfgVals.tsCallback;
   }
 }
 
-module.exports.oa2AppSettings = function(port) {
-  tsAuthenticationSettings.redirect_uri = setTSRedirectURI(port);
+module.exports.oa2AppSettings = function() {
+  tsAuthenticationSettings.redirect_uri = setTSRedirectURI();
   return tsAuthenticationSettings;
 }
 

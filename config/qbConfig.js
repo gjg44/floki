@@ -1,11 +1,14 @@
-const qbSandboxClientID = 'Q0xKCSwHzkYafj5XTIgjst036kK08DrcAmm9HcB28godJxJApS';
-const qbSandboxClientSecret = 'xYaKJYLyOKwzFpPlhXmBp0sYuQ46ijLmpcZKTZOs';
-const qbSandbox1CompanyID =  193514579895534;
-const qbSandbox2CompanyID = 193514593237604;
+var cfgVals = require('./config');
 
-const qbRRJClientID = 'Q0n4lKJ2IiOaFAyuprC3UKlAron9YJmg2BHhKC3CFYSyDtQ9mG';
-const qbRRJClientSecret = 'DzoxUQvur4LeaMPaKhHE3WhVtSByfAYqGcdnUmpF';
-const qbRRJCompanyID = 123145721334974
+
+const qbSandboxClientID = cfgVals.qbSandboxClientID;
+const qbSandboxClientSecret = cfgVals.qbSandboxClientSecret;
+const qbSandbox1CompanyID =  cfgVals.qbSandbox1CompanyID;
+const qbSandbox2CompanyID = cfgVals.qbSandbox2CompanyID;
+
+const qbRRJClientID = cfgVals.qbRRJClientID;
+const qbRRJClientSecret = cfgVals.qbRRJClientSecret;
+const qbRRJCompanyID = cfgVals.qbRRJCompanyID;
 
 var QB_Globals = {
   Production_ClientID: qbRRJClientID,
@@ -65,12 +68,13 @@ var qbAppSettings = {
   }
 };
 
-function setQBRedirectURI(port) {
+function setQBRedirectURI() {
+  const port = process.env.PORT || 3000;
   if (port === 3000) {
-    return "http://localhost:"+port+"/QBcallback";
+    return cfgVals.localhost+cfgVals.port+cfgVals.tsCallback;
   } else {
-    return "https://simple-oauth2.herokuapp.com/QBcallback";
-  }
+    return cfgVals.herokuAppLink+cfgVals.qbCallback;
+  } 
 }
 
 module.exports.createNodeQBObject = function (
@@ -97,7 +101,7 @@ module.exports.createNodeQBObject = function (
   return NodeQuickBooksOauth2_Object;
 }
 
-module.exports.oa2AppSettings = function(port) {
-  qbAppSettings.redirect_uri = setQBRedirectURI(port);
+module.exports.oa2AppSettings = function() {
+  qbAppSettings.redirect_uri = setQBRedirectURI();
   return qbAppSettings;
 }
