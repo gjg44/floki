@@ -6,16 +6,16 @@ const tsClientSecret = cfgVals.tsClientSecret;
 const TSheetsApi = require('tsheetsapi');
 
 
-var tsAuthenticationSettings = {
-  client_id: tsClientID,
+var tsAuth = {
+  client_id: '',
   redirect_uri: '',
   response_type: 'code',
   grant_type: 'authorization_code',
   initState: 'tsInitState',
   userCreds: {
     client: {
-      id: tsClientID,
-      secret: tsClientSecret,
+      id: '',
+      secret: '',
     },
     auth: {
       tokenHost: 'https://rest.tsheets.com',
@@ -42,8 +42,7 @@ var tsAuthenticationSettings = {
 }
 
 
-function setTSRedirectURI() {
-  const port = process.env.PORT || 3000;
+function setTSRedirectURI(port) {
   if (port === 3000) {
     return cfgVals.localhost+cfgVals.port+cfgVals.tsCallback;
   } else {
@@ -52,8 +51,18 @@ function setTSRedirectURI() {
 }
 
 module.exports.oa2AppSettings = function() {
-  tsAuthenticationSettings.redirect_uri = setTSRedirectURI();
-  return tsAuthenticationSettings;
+  const port = process.env.PORT || 3000;
+  tsAuth.redirect_uri = setTSRedirectURI(port);
+  if (port === 3000) {
+    tsAuth.clientID = cfgVals.tsClientID;
+    tsAuth.userCreds.client.id = cfgVals.tsClientID;
+    tsAuth.userCreds.client.secret = cfgVals.tsClientSecret;
+  } else {
+    tsAuth.clientID = cfgVals.tsHerokuClientID;
+    tsAuth.userCreds.client.id = cfgVals.tsHerokuClientID;
+    tsAuth.userCreds.client.secret = cfgVals.tsHerokuClientSecret;
+  }
+  return tsAuth;
 }
 
 module.exports.tsApi = function(AuthResponse) {
