@@ -65,7 +65,8 @@ var qbAppSettings = {
     x_refresh_token_expires_in: '',
     expires_in: '',
     token_type: ''
-  }
+  },
+  sandboxFlag: true
 };
 
 function setQBRedirectURI(port) {
@@ -104,17 +105,19 @@ module.exports.oa2AppSettings = function() {
   const port = process.env.PORT || 3000;
   qbAppSettings.redirect_uri = setQBRedirectURI(port);
   if (port === 3000) {
-    qbAppSettings.clientID = cfgVals.qbSandboxClientID;
-    qbAppSettings.clientSecret = cfgVals.qbSandboxClientSecret;
+    qbAppSettings.clientID = cfgVals.qbFlokiV0AppSandboxClientID;
+    qbAppSettings.clientSecret = cfgVals.qbFlokiV0AppSandboxClientSecret;
     qbAppSettings.companyID = cfgVals.qbSandbox1CompanyID;
     qbAppSettings.userCreds.client.id = cfgVals.qbSandboxClientID;
     qbAppSettings.userCreds.client.secret = cfgVals.qbSandboxClientSecret;
+    qbAppSettings.sandboxFlag = true;
   } else {
-    qbAppSettings.clientID = cfgVals.qbRRJClientID;
-    qbAppSettings.clientSecret = cfgVals.qbRRJClientSecret;
+    qbAppSettings.clientID = cfgVals.qbFlokiV0AppProductionClientID;
+    qbAppSettings.clientSecret = cfgVals.qbFlokiV0AppProductionClientSecret;
     qbAppSettings.companyID = cfgVals.qbRRJCompanyID;
     qbAppSettings.userCreds.client.id = cfgVals.qbRRJClientID;
     qbAppSettings.userCreds.client.secret = cfgVals.qbRRJClientSecret;
+    qbAppSettings.sandboxFlag = false;
   }
 
   return qbAppSettings;
